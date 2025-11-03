@@ -1,7 +1,6 @@
 import sys
 from pathlib import Path
 
-# --- Parsing ---
 def parse_input_file(filename):
     """Return (grid:list[str], target_cols:list[int], target_rows:list[int], n:int)."""
     with open(filename, "r") as f:
@@ -12,7 +11,6 @@ def parse_input_file(filename):
     n = len(grid)
     return grid, target_cols, target_rows, n
 
-# --- Find thermometers ---
 def find_thermometers(grid, n):
     thermometers = {}
     thermometer_id = 1
@@ -50,7 +48,6 @@ def find_thermometers(grid, n):
                     visited[rr][cc] = True
     return thermometers
 
-# --- Write facts ---
 def write_facts(outfile, n, thermometers, target_cols, target_rows):
     """Write 0-based LP file compatible with decode.py"""
     with open(outfile, "w") as f:
@@ -76,6 +73,8 @@ def write_facts(outfile, n, thermometers, target_cols, target_rows):
         f.write("\n")
         for c,val in enumerate(target_cols):
             f.write(f"target_col({c},{val}).\n")
+        # ensure uniqueness model
+        f.write("#minimize { (R*100 + C) : fill(R,C) }.\n\n")
 
 def main():
     if len(sys.argv) != 3:

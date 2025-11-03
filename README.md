@@ -99,14 +99,63 @@ It requires a single command-line argument: the number of the domain to solve (e
 
 ## How to Run
 
-To run the full workflow for a specific puzzle (e.g., `dom05.txt`):
-
+To run the full workflow for a specific puzzle (e.g., `./examplesthermo/dom01.txt`):
+Open a terminal on your working directory and hit the command :
 ```bash
-python3 generate.py 05
+python3 generate.py 01
 ```
 
 This will:
+1.  Create `./doma01.lp` (facts).
+2.  Create `./result01.txt` (solution grid).
+3.  Primpt the text:
+```bash
+Running workflow for number: 05
+--------------------
+STEP: Encoding
+Executing: python3 encode.py examplesthermo/dom05.txt domain05.lp
+--------------------
+Encoded examplesthermo/dom05.txt --->> domain05.lp
+--------------------
+STEP: Decoding
+Executing: python3 decode.py thermo.lp domain05.lp (output will be printed and saved)
+--------------------
+xxxx...xx.xxx..
+.xx..x.xx...xxx
+.xxxxxxx....x..
+.xx..x..x...xx.
+.xx..x.xx...xxx
+.xxxxx..xxx.xxx
+.xxxx.....xxx.x
+.xxxxxxxxx.xx.x
+.x.............
+.x..........xx.
+.x.....xxxxxx..
+..xxxxxxxx..xxx
+.xx..x......x.x
+..xx.x.x....x.x
+..x..x.xxxxxxx.
+--------------------
+STEP: Drawing
+Executing: python3 drawThermo.py examplesthermo/dom05.txt result05.txt
+--------------------
+pygame 2.6.1 (SDL 2.28.4, Python 3.12.3)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+```
+4.  Open a Pygame window displaying the graphical solution.
 
-1.  Create `domain05.lp` (facts).
-2.  Create `result05.txt` (solution grid).
-3.  Open a Pygame window displaying the graphical solution.
+![Solution05](./Solution05.png)
+
+
+
+## How to generate a single domXX.lp file
+Open a terminal on your working directory and hit the command :
+```bash
+$> python3 encode.py .\examplesthermo\dom01.txt dom01.lp
+```
+This will:
+1.  Create `./doma01.lp` (facts).
+2. Prompt the following text:
+```bash
+Encoded .\examplesthermo\dom01.txt --->> dom01.lp
+```
